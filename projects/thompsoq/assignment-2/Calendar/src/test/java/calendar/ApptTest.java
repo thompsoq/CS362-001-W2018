@@ -7,75 +7,86 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 public class ApptTest {
-    /**
-     * Test that the gets methods work as expected.
-     */
-	 @Test
-	  public void test01()  throws Throwable  {
-		 int startHour=24;
-		 int startMinute=30;
-		 int startDay=15;
-		 int startMonth=01;
-		 int startYear=2018;
-		 String title="Birthday Party";
-		 String description="This is my birthday party.";
-		 //Construct a new Appointment object with the initial data	 
-		 Appt appt = new Appt(//startHour,
-				  0,//0,
-				  0, //
-				  1, //0, //
-				  1 , //0, //
-				  1997 , //"a",
-				  "a",
-				  "a");
-	// assertions
-		 assertTrue(appt.getValid());
-		 appt.setStartHour(startHour);
-		 appt.setStartMinute(startMinute);
-		 appt.setStartDay(startDay);
-		 appt.setStartMonth(startMonth);
-		 appt.setStartYear(startYear);
-		 appt.setTitle(title);
-		 appt.setDescription(description);
+	/**
+	 * Test that the gets methods work as expected.
+	 */
+	@Test
+	public void test01()  throws Throwable  {
+		int startHour=24;
+		int startMinute=30;
+		int startDay=15;
+		int startMonth=01;
+		int startYear=2018;
+		String title="Birthday Party";
+		String description="This is my birthday party.";
+		//Construct a new Appointment object with the initial data
+		Appt appt = new Appt(//startHour,
+				0,//0,
+				0, //
+				1, //0, //
+				1 , //0, //
+				1997 , //"a",
+				"",
+				"");
+		// assertions
+		assertTrue(appt.getValid());
+		appt.setStartHour(70);
+		assertFalse(appt.getValid());
+		appt.setStartMinute(100);
+		assertFalse(appt.getValid());
+		appt.setStartDay(100);
 
-		 assertEquals(24, appt.getStartHour());
-		 assertEquals(30, appt.getStartMinute());
-		 assertEquals(15, appt.getStartDay());
-		 assertEquals(01, appt.getStartMonth());
-		 assertEquals(2018, appt.getStartYear());
-		 assertEquals("Birthday Party", appt.getTitle());
-		 assertEquals("This is my birthday party.", appt.getDescription());
-		 appt.setStartHour(startHour);
 
-	 }
+		appt.setStartHour(startHour);
+		appt.setStartMinute(startMinute);
+		appt.setStartDay(startDay);
+		appt.setStartMonth(startMonth);
+		appt.setStartYear(startYear);
+		appt.setTitle(null);
+		appt.setDescription(null);
+		appt.setTitle(title);
+		appt.setDescription(description);
 
-	 @Test
-	  public void test02()  throws Throwable  {
-		 int startHour=21;
-		 int startMinute=30;
-		 int startDay=15;
-		 int startMonth=01;
-		 int startYear=2018;
-		 String title="Birthday Party";
-		 String description="This is my birthday party.";
-		 //Construct a new Appointment object with the initial data
-		 Appt appt = new Appt(startHour,
-				 startMinute ,
-				 startDay ,
-				 startMonth ,
-				 startYear ,
-				 title,
-				 description);
-		 // assertions
-		 int RECUR_BY_MONTHLY = 2;
-		 int RECUR_NUMBER_NEVER = 0;
-		 int[] recurringDays = new int[0];
-		 appt.setRecurrence(recurringDays, RECUR_BY_MONTHLY, 0, RECUR_NUMBER_NEVER);
-		 assertEquals(RECUR_BY_MONTHLY, appt.getRecurBy());
-		 assertEquals(recurringDays, appt.getRecurDays());
-		 assertEquals(false, appt.isRecurring());
-		 assertEquals(0, appt.getRecurIncrement());
-	 }
+
+		assertEquals(24, appt.getStartHour());
+		assertEquals(30, appt.getStartMinute());
+		assertEquals(15, appt.getStartDay());
+		assertEquals(01, appt.getStartMonth());
+		assertEquals(2018, appt.getStartYear());
+		assertEquals("Birthday Party", appt.getTitle());
+		assertEquals("This is my birthday party.", appt.getDescription());
+
+		assertEquals(0, appt.compareTo(appt));
+	}
+
+	@Test
+	public void test02()  throws Throwable  {
+		int startHour=21;
+		int startMinute=30;
+		int startDay=15;
+		int startMonth=01;
+		int startYear=2018;
+		String title="Birthday Party";
+		String description="This is my birthday party.";
+		//Construct a new Appointment object with the initial data
+		Appt appt = new Appt(startHour,
+				startMinute ,
+				startDay ,
+				startMonth ,
+				startYear ,
+				title,
+				description);
+		// assertions
+		int RECUR_BY_MONTHLY = 2;
+		int RECUR_NUMBER_NEVER = 0;
+		int[] recurringDays = new int[0];
+		appt.setRecurrence(recurringDays, RECUR_BY_MONTHLY, 0, RECUR_NUMBER_NEVER);
+		assertEquals(RECUR_BY_MONTHLY, appt.getRecurBy());
+		assertEquals(recurringDays, appt.getRecurDays());
+		assertEquals(false, appt.isRecurring());
+		assertEquals(0, appt.getRecurIncrement());
+		appt.setRecurrence(null, RECUR_BY_MONTHLY, 0, RECUR_NUMBER_NEVER);
+	}
 	@Test
 	public void test3()  throws Throwable  {
 		//Construct a new Appointment object with the initial data
@@ -88,7 +99,9 @@ public class ApptTest {
 				"a");
 		// assertions
 		assertEquals(null, appt.toString());
-	 }
+
+	}
+
 	@Test
 	public void test4()  throws Throwable  {
 		int startHour=23;
@@ -108,7 +121,10 @@ public class ApptTest {
 				description);
 		// assertions
 		assertEquals("\t1/15/2018 at 11:30pm ,Birthday Party, This is my birthday party.\n" , appt.toString());
+		appt.setStartHour(0);
+		assertEquals("\t1/15/2018 at 12:30am ,Birthday Party, This is my birthday party.\n" , appt.toString());
 	}
+
 //add more unit tests as you needed
 
 }
