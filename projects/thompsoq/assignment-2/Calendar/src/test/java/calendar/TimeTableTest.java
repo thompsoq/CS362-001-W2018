@@ -37,17 +37,57 @@ public class TimeTableTest {
 				 description);
 		 listAppts.add(appt);
 
+		 Appt appt7 = new Appt(17,
+				 startMinute ,
+				 28 ,
+				 startMonth ,
+				 startYear ,
+				 title,
+				 description);
+		 listAppts.add(appt7);
+
+		 int[] recurringDays = new int[1];
+		 recurringDays[0] = 2;
 		 Calendar rightnow = Calendar.getInstance();
 
 		 int thisMonth = rightnow.get(Calendar.MONTH);
 		 int thisYear = rightnow.get(Calendar.YEAR);
 		 int thisDay = rightnow.get(Calendar.DAY_OF_MONTH);
 
-		 int[] recurringDays = new int[0];
 		 GregorianCalendar today = new GregorianCalendar(thisYear,thisMonth,thisDay);
 		 GregorianCalendar tomorrow = (GregorianCalendar)today.clone();
 		 tomorrow.add(Calendar.DAY_OF_MONTH,1);
-		 appt.setRecurrence(recurringDays, 2, 0, 2);
+		 appt.setRecurrence(recurringDays, 1, 2, 6);
+		 GregorianCalendar cal = new GregorianCalendar();
+		 CalDay calday = new CalDay(cal);
+
+		 assertEquals(6, appt.getRecurNumber());
+		 timetable.getApptRange(listAppts, today, tomorrow);
+
+		 Appt appt1 = new Appt(22,
+				 startMinute ,
+				 28 ,
+				 startMonth ,
+				 startYear ,
+				 title,
+				 description);
+		 listAppts.add(appt1);
+		 calday.addAppt(appt1);
+		 appt.setRecurrence(recurringDays, 2, 1, 6);
+		 assertEquals(6, appt.getRecurNumber());
+		 timetable.getApptRange(listAppts, today, tomorrow);
+
+		 Appt appt2 = new Appt(21,
+				 startMinute ,
+				 23 ,
+				 startMonth ,
+				 startYear ,
+				 title,
+				 description);
+		 listAppts.add(appt2);
+		 calday.addAppt(appt2);
+		 appt.setRecurrence(recurringDays, 3, 1, 6);
+		 assertEquals(6, appt.getRecurNumber());
 		 timetable.getApptRange(listAppts, today, tomorrow);
 
 	 }
