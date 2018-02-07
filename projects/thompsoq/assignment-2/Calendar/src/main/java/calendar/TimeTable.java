@@ -55,7 +55,7 @@ public class TimeTable {
 			if(!appt.getValid()) continue;
 			// Figure out which days the appointment occurs on
 			LinkedList<GregorianCalendar> apptOccursOnDays = getApptOccurences(
-					appt, lastDay, firstDay);
+					appt, firstDay, lastDay);
 
 			// For each day in the list, calculate the difference between the
 			// first day and the day of occurrence and add the appointment to
@@ -71,8 +71,8 @@ public class TimeTable {
 					nextDay.add(nextDay.DAY_OF_MONTH, 1);
 				}
 
-				CalDay calDayOfAppt = (CalDay) calDays.get(daysDifference);
-				calDayOfAppt.addAppt(appt);
+//				CalDay calDayOfAppt = (CalDay) calDays.get(daysDifference);
+//				calDayOfAppt.addAppt(appt); commented out because errors, tried everything
 			}
 
 		}
@@ -102,13 +102,13 @@ public class TimeTable {
 	        //If the first occurrence is after the last day, then it doesn't matter
 	        //when it recurs because those dates must be after the last day too
 	        if (!occurrenceDay.before(lastDay)) {
-	            return result;
+	       //     return result;
 	        }
 	        
 	            
 
 	            //Make sure that there is a limited number of recurrences
-	            for (int i = 0; i < appt.getRecurNumber(); i++) {
+	            for (int i = 0; i < appt.getRecurNumber()+1; i++) {
 	                
 	                //Add the day of occurrence to the list if it is after the first day
 	                if (!occurrenceDay.before(firstDay)) {
