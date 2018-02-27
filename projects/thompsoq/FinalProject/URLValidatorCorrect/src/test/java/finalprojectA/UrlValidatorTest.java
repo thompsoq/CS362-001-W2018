@@ -81,29 +81,29 @@ protected void setUp() {
     * @param testObjects Used to create a url.
     */
    public void testIsValid(Object[] testObjects, long allowAllSchemes) {
-      UrlValidator urlVal = new UrlValidator(null, null, allowAllSchemes);
-      //UrlValidator urlVal = new UrlValidator(null, allowAllSchemes);
+	      UrlValidator urlVal = new UrlValidator(null, null, allowAllSchemes);
+	      //UrlValidator urlVal = new UrlValidator(null, allowAllSchemes);
       assertTrue(urlVal.isValid("http://www.google.com"));
-      assertTrue(urlVal.isValid("http://www.google.com/")); // asserts hyperlink
+      assertTrue(urlVal.isValid("http://www.google.com/"));
       int statusPerLine = 60;
       int printed = 0;
-      if (printIndex)  { // not sure
+      if (printIndex)  {
          statusPerLine = 6;
       }
-      do { // do
-         StringBuilder testBuffer = new StringBuilder(); // new string
+      do {
+          StringBuilder testBuffer = new StringBuilder();
          boolean expected = true;
-         for (int testPartsIndexIndex = 0; testPartsIndexIndex < testPartsIndex.length; ++testPartsIndexIndex) { // runs through index length
-            int index = testPartsIndex[testPartsIndexIndex]; // index spot is the test parts index spot
-            ResultPair[] part = (ResultPair[]) testObjects[testPartsIndexIndex]; //
-            testBuffer.append(part[index].item); // append testbuffer with an index item
-            expected &= part[index].valid; // checks wheter the expected result is valid
+         for (int testPartsIndexIndex = 0; testPartsIndexIndex < testPartsIndex.length; ++testPartsIndexIndex) {
+            int index = testPartsIndex[testPartsIndexIndex];
+            ResultPair[] part = (ResultPair[]) testObjects[testPartsIndexIndex];
+            testBuffer.append(part[index].item);
+            expected &= part[index].valid;
          }
-         String url = testBuffer.toString(); // url is set to stringified version of testbuffer
+         String url = testBuffer.toString();
          boolean result = urlVal.isValid(url);
          if(result == true)
         	 System.out.println(url);
-         assertEquals(url, expected, result); // asserst result
+         assertEquals(url, expected, result);
          if (printStatus) {
             if (printIndex) {
                System.out.print(testPartsIndextoString());
