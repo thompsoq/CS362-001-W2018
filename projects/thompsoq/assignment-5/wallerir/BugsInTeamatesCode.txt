@@ -1,0 +1,37 @@
+Bug Report.
+#1
+Bug Name: LPYRDYS Number: #0000000
+Symptom: incorrect number of days in February.
+Cause: Incorrect addition amount when compensating for a leap year.
+How to reproduce: If the Year is divisible by 4 or 400, but not 100, the program will attempt to 
+compensate for lost time due to time differences between years in the Gregorian Calender.
+It does so by making it a leap year, which adds a single day to February, the shortest month.
+However, the program seems to add five days instead of one.
+Replicated by:	
+				appt.setStartYear(2020);
+				appt.setStartDay(30);
+				assertFalse(appt.getValid());
+
+Version: This bug was detected on IntelliJ 2017.2.5, on Assignment 1 in the staging process.
+Severity of bug: 1 - Lowest severity/10 - Highest severity: This bug is a severity 7.
+If this bug occurs, all days will be offset by 4, causing problems with appointments.
+Priority of bug: 1 - Lowest priority/10 - Highest priority: This bug is a priority 3.
+The bug will not occur for 2 more years, a roll out patch can be applied to fix it.
+
+#2
+Bug Name: APPTWHRS Number: #0000001
+Symptom: Ability to make an appointment at 13:00 PM
+Cause: Incorrect parameters for validation of date.
+How to reproduce: An appointment can be set up at a specific time, which includes
+hours during the day. Simply place your appointment on the 24th hour of 0-23, giving your
+an appointment at 13:00 PM.
+Replicated by:	
+Version: This bug was detected on IntelliJ 2017.2.5, on Assignment 1 in the staging process.
+Severity of bug: 1 - Lowest severity/10 - Highest severity: This bug is a severity 4.
+The ability to make this an appointment at this time does not harm the program. It only
+serves to harm the user at their discretion, because they would need to be the ones to
+placed the appointment.
+Priority of bug: 1 - Lowest priority/10 - Highest priority: This bug is a priority 6.
+This bug is a fairly obvious one that can be exploited. This would discourage customers
+from purchasing the application if rolled out if word got out that the application had
+such obvious bugs.
